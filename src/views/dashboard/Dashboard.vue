@@ -34,7 +34,7 @@
           <el-col :span="8">
             <el-card shadow="hover" :body-style="{ padding: '0px' }">
               <div class="grid-content grid-con-1">
-                <i class="el-icon-lb-un-crowd-o grid-con-icon"></i>
+                <i class="el-icon-reading grid-con-icon"></i>
                 <div class="grid-cont-right">
                   <count-to :start-val="0" :end-val="666" :duration="3000" class="grid-num"></count-to>
                   <div>访问量</div>
@@ -45,7 +45,7 @@
           <el-col :span="8">
             <el-card shadow="hover" :body-style="{ padding: '0px' }">
               <div class="grid-content grid-con-2">
-                <i class="el-icon-lb-un-message-o grid-con-icon"></i>
+                <i class="el-icon-reading grid-con-icon"></i>
                 <div class="grid-cont-right">
                   <count-to :start-val="0" :end-val="666" :duration="3000" class="grid-num"></count-to>
                   <div>系统消息</div>
@@ -56,7 +56,7 @@
           <el-col :span="8">
             <el-card shadow="hover" :body-style="{ padding: '0px' }">
               <div class="grid-content grid-con-3">
-                <i class="el-icon-lb-suggest grid-con-icon"></i>
+                <i class="el-icon-reading grid-con-icon"></i>
                 <div class="grid-cont-right">
                   <count-to :start-val="0" :end-val="666" :duration="3000" class="grid-num"></count-to>
                   <div>数量</div>

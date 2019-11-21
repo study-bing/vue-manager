@@ -32,7 +32,7 @@ export const router = new Router({
 	routes: routes
 });
 //异步路由（需要权限的页面）
-export const asyncRouterMap = [{
+const asyncRouterMap = [{
 	path: '',
 	component: () => import( /* webpackChunkName: "home" */ '@/views/common/Home.vue'),
 	children: [{
@@ -52,6 +52,15 @@ export const asyncRouterMap = [{
 		},
 		path: '/icon',
 		component: () => import( /* webpackChunkName: "Icon" */ '@/views/devFile/Icon.vue')
+	},
+	{
+		meta: {
+			title: 'tinymceEditor',
+			routeActive: '/tinymceEditor',
+			permission: []
+		},
+		path: '/tinymceEditor',
+		component: () => import( /* webpackChunkName: "Icon" */ '@/views/devFile/TinymceEditor.vue')
 	}
 	]
 }, ];

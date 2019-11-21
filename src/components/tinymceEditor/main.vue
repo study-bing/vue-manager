@@ -30,12 +30,15 @@ export default {
 		},
 		plugins: {
 			type: [String, Array],
-			default: 'lists image media table textcolor wordcount contextmenu'
+			default() {
+				return ['advlist anchor autolink autosave code codesample   directionality emoticons fullscreen hr image imagetools insertdatetime link lists media nonbreaking noneditable pagebreak paste preview print save searchreplace spellchecker tabfocus table template textcolor textpattern visualblocks visualchars wordcount'];
+			}
 		},
 		toolbar: {
 			type: [String, Array],
-			default:
-        'undo redo |  formatselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | lists image media table | removeformat'
+			default() {
+				return ['searchreplace bold italic underline strikethrough alignleft aligncenter alignright outdent indent  blockquote undo redo removeformat subscript superscript code codesample', 'hr bullist numlist link image charmap preview anchor pagebreak insertdatetime media table emoticons forecolor backcolor fullscreen'];
+			}
 		}
 	},
 	data() {
@@ -51,6 +54,16 @@ export default {
         toolbar:
           "bold italic underline strikethrough | fontsizeselect | forecolor backcolor | alignleft aligncenter alignright alignjustify | bullist numlist | outdent indent blockquote | undo redo | link unlink image code | removeformat",
         menubar: false,
+         end_container_on_empty_block: true,
+        powerpaste_word_import: 'clean',
+        code_dialog_height: 450,
+        code_dialog_width: 1000,
+        advlist_bullet_styles: 'square',
+        advlist_number_styles: 'default',
+        imagetools_cors_hosts: ['www.tinymce.com', 'codepen.io'],
+        default_link_target: '_blank',
+        link_title: false,
+        nonbreaking_force_tab: true,
         //此处为图片上传处理函数，这个直接用了base64的图片形式上传图片，
         //如需ajax上传可参考https://www.tiny.cloud/docs/configure/file-image-upload/#images_upload_handler
         images_upload_handler: (blobInfo, success, failure) => {

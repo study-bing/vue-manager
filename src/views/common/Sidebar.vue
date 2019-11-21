@@ -105,6 +105,10 @@ export default {
 					{
 						index: '/DragDialog',
 						title: 'DragDialog'
+					},
+					{
+						index: '/tinymceEditor',
+						title: 'tinymceEditor'
 					}
 				]
 			});

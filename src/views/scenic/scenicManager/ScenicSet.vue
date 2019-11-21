@@ -1,6 +1,6 @@
 <template>
   <div class="setScenic" ref="contents">
-    <el-dialog title="添加/编辑景区" :visible.sync="visible" width="600px">
+    <el-dialog v-dialogDrag title="添加/编辑景区" :visible.sync="visible" width="600px">
       <el-form
         :model="ruleForm"
         :rules="rules"
