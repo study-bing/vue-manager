@@ -70,8 +70,7 @@ export default {
   position: relative;
   width: 100%;
   height: 100%;
-  background-image: url(../../assets/img/aisi.jpeg);
-  background-size: cover;
+  background-color: #5e5c5c;
 }
 .ms-title {
   width: 100%;

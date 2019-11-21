@@ -55,15 +55,35 @@ export default {
 			items: [
 				{
 					icon: 'el-icon-eleme',
-					index: 'index',
+					index: '/dashboard',
 					title: '系统首页'
+				},
+				{
+					icon: 'el-icon-document',
+					index: '1',
+					title: '景区管理',
+					subs: [
+						{
+							index: '/scenic/scenicList',
+							title: '景区列表'
+						},
+						{
+							index: '/scenic/orderList',
+							title: '订单管理'
+						}
+					]
+				},
+				{
+					icon: 'el-icon-user',
+					index: '/user',
+					title: '用户管理'
 				}
 			]
 		};
 	},
 	computed: {
 		onRoutes() {
-			return this.$route.path.replace('/', '');
+			return this.$route.meta.routeActive;
 		}
 	},
 	created() {
@@ -74,16 +94,16 @@ export default {
 		});
 		if (isDev) {
 			this.items.push({
-				icon: 'el-icon-lb-un-share-o',
+				icon: 'el-icon-view',
 				index: String(this.items.length - 1),
 				title: '开发资料',
 				subs: [
 					{
-						index: 'icon',
+						index: '/icon',
 						title: 'icon图标'
 					},
 					{
-						index: 'DragDialog',
+						index: '/DragDialog',
 						title: 'DragDialog'
 					}
 				]

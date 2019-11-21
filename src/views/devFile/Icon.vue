@@ -11,17 +11,18 @@
         直接通过设置类名为 el-icon-lx-iconName 来使用即可。例如：（共{{ iconList.length }}个图标）
       </p>
       <p class="example-p">
-        <i class="el-icon-lb-un-scan-o" style="font-size: 30px;color: #ff5900"></i>
-        <span>&lt;i class=&quot;el-icon-lb-un-scan-o&quot;&gt;&lt;/i&gt;</span>
+        <svg-icon icon-class="suggest" style="font-size: 30px;color: #ff5900" />
+        <span>&lt;svg-icon icon-class=&quot;un-scan-o&quot;&gt;&lt;/svg-icon&gt;</span>
       </p>
       <p class="example-p">
-        <i class="el-icon-lb-un-message-o" style="font-size: 30px;color:#fd5656"></i>
-        <span>&lt;i class=&quot;el-icon-lb-un-message-o&quot;&gt;&lt;/i&gt;</span>
+        <svg-icon  icon-class="un-message-o" style="font-size: 30px;color:#fd5656"/>
+        <span>&lt;svg-icon icon-class=&quot;un-message-o&quot;&gt;&lt;/svg-icon&gt;</span>
       </p>
       <p class="example-p">
-        <i class="el-icon-lb-aa-voice-o" style="font-size: 30px;color: #ffc300"></i>
-        <span>&lt;i class=&quot;el-icon-lb-aa-voice-o&quot;&gt;&lt;/i&gt;</span>
+        <svg-icon  icon-class="aa-voice-o" style="font-size: 30px;color: #ffc300"></svg-icon>
+        <span>&lt;svg-icon icon-class=&quot;aa-voice-o&quot;&gt;&lt;/svg-icon&gt;</span>
       </p>
+      <p style="color:red">注：每次引入新svg时候执行svgo -f ./src/assets/svg优化svg文件<p/>
       <br />
       <h2>图标</h2>
       <div class="search-box">
@@ -30,7 +31,7 @@
       <ul>
         <li class="icon-li" v-for="(item, index) in list" :key="index">
           <div class="icon-li-content">
-            <i :class="`el-icon-lb-${item}`"></i>
+            <svg-icon  :icon-class="`${item}`"></svg-icon>
             <span>{{ item }}</span>
           </div>
         </li>
@@ -40,10 +41,13 @@
 </template>
 
 <script>
+import svgIcons from './svg-icons';
 export default {
+
 	data: function(){
 		return {
 			keyword: '',
+			svgIcons: svgIcons,
 			iconList: [
 				'suggest',
 				'un-dropdown-o',
@@ -110,6 +114,9 @@ export default {
 				return item.indexOf(this.keyword) !== -1;
 			});
 		}
+	},
+	created(){
+		this.iconList = this.iconList.concat(svgIcons);
 	}
 };
 </script>

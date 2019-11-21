@@ -13,13 +13,14 @@
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
 }
-@import "./assets/css/main.css";
-@import "./assets/css/color-dark.css"; /*深色主题*/
+
 *,
 :after,
 :before {
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 .fade-enter-active,
 .fade-leave-active {

@@ -106,7 +106,7 @@
 import countTo from 'vue-count-to';
 import { getDateTime } from '@utils';
 export default {
-	name: 'index',
+	name: 'dashboard',
 	components: { countTo },
 	data() {
 		return {

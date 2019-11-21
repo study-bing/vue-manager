@@ -1,21 +1,39 @@
 // vue.config.js
-const CompressionPlugin = require('compression-webpack-plugin')
-const path = require('path')
+const CompressionPlugin = require('compression-webpack-plugin');
+const path = require('path');
 module.exports = {
 	configureWebpack: () => ({
 		resolve: {
 			alias: {
-				'@utils': path.resolve('./src/modules/utils')
+				'@utils': path.resolve('./src/modules/utils'),
+				'@mixin': path.resolve('./src/mixin/'),
+				'@comp': path.resolve('./src/components/')
 			}
 		}
 	}),
 	chainWebpack: config => {
+    // set svg-sprite-loader
+    config.module
+      .rule('svg')
+      .exclude.add(path.resolve('./src/assets/svg'))
+      .end()
+    config.module
+      .rule('assets')
+      .test(/\.svg$/)
+      .include.add(path.resolve('./src/assets/svg'))
+      .end()
+      .use('svg-sprite-loader')
+      .loader('svg-sprite-loader')
+      .options({
+        symbolId: 'icon-[name]'
+      })
+      .end()
 		// 这里是对环境的配置，不同环境对应不同的BASE_URL，以便axios的请求地址不同
 		config.plugin('define').tap(args => {
-			args[0]['process.env'].BASE_URL = JSON.stringify(process.env.BASE_URL)
-			args[0]['process.env'].API_KEY = JSON.stringify(process.env.API_KEY)
-			return args
-		})
+			args[0]['process.env'].BASE_URL = JSON.stringify(process.env.BASE_URL);
+			args[0]['process.env'].API_KEY = JSON.stringify(process.env.API_KEY);
+			return args;
+		});
 		if (process.env.NODE_ENV === 'production') {
 			// #region 启用GZip压缩
 			config
@@ -28,7 +46,7 @@ module.exports = {
 				minRatio: 0.8,
 				cache: true
 			})
-			.tap(args => {})
+			.tap(args => {});
 
 			// #endregion
 
@@ -40,8 +58,8 @@ module.exports = {
 				'element-ui': 'ELEMENT',
 				'vue-router': 'VueRouter',
 				'vuex': 'Vuex'
-			}
-			config.externals(externals)
+			};
+			config.externals(externals);
 			const cdn = {
 				css: [
 					// element-ui css
@@ -60,12 +78,12 @@ module.exports = {
 					// element-ui js
 					'//unpkg.com/element-ui/lib/index.js'
 				]
-			}
+			};
 			config.plugin('html')
 			.tap(args => {
-				args[0].cdn = cdn
-				return args
-			})
+				args[0].cdn = cdn;
+				return args;
+			});
 
 			// #endregion
 		}
@@ -81,4 +99,4 @@ module.exports = {
 			}
 		}
 	}
-}
+};

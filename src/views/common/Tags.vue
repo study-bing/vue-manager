@@ -89,6 +89,7 @@ export default {
 				if (this.tagsList.length >= 8) {
 					this.tagsList.shift();
 				}
+				console.log(route.matched[1].components);
 				this.tagsList.push({
 					title: route.meta.title,
 					path: route.fullPath,

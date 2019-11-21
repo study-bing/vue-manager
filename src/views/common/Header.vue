@@ -6,6 +6,7 @@
       <i v-else class="el-icon-s-unfold"></i>
     </div>
     <div class="logo">后台管理系统</div>
+    <!-- <breadcrumb></breadcrumb> -->
     <div class="header-right">
       <div class="header-user-con">
         <!-- 全屏显示 -->
@@ -46,6 +47,7 @@
 </template>
 <script>
 import bus from '../common/bus';
+// import breadcrumb from '@comp/breadcrumb';
 export default {
 	data() {
 		return {
@@ -55,6 +57,7 @@ export default {
 			message: 2
 		};
 	},
+	// components: { breadcrumb },
 	computed: {
 		username() {
 			let username = sessionStorage.getItem('ms_username');
@@ -70,7 +73,7 @@ export default {
 		handleCommand(command) {
 			if (command === 'loginout') {
 				sessionStorage.removeItem('ms_username');
-				this.$router.push('/login');
+				this.$router.push('/');
 			}
 		},
 		/**
@@ -195,5 +198,8 @@ export default {
 }
 .el-dropdown-menu__item {
   text-align: center;
+}
+>>> .el-breadcrumb__inner > a {
+  color: #ffffff;
 }
 </style>

@@ -5,5 +5,5 @@
  * @author linbin <yangdanyan@freshfirst.cn>
  * @date 2019-10-22
  */
-// 接口地址
-// export const userInfo				=	state => state.userInfo; // 用户信息
+export const userInfo = state => state.userInfo; // 用户信息
+export const routeList = state => state.routeList; // 路由权限列表
