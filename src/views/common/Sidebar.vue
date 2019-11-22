@@ -104,11 +104,23 @@ export default {
 					},
 					{
 						index: '/DragDialog',
-						title: 'DragDialog'
+						title: '弹框拖拽'
 					},
 					{
 						index: '/tinymceEditor',
-						title: 'tinymceEditor'
+						title: '富文本'
+					},
+					{
+						index: '/tableDrag',
+						title: '列表拖拽'
+					},
+					{
+						index: '/sticky',
+						title: 'sticky'
+					},
+					{
+						index: '/test',
+						title: '测试页面'
 					}
 				]
 			});
@@ -125,6 +137,7 @@ export default {
   top: 50px;
   bottom: 0;
   overflow-y: scroll;
+  height: 100%;
 }
 .sidebar::-webkit-scrollbar {
   width: 0;

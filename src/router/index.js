@@ -37,7 +37,7 @@ const asyncRouterMap = [{
 	component: () => import( /* webpackChunkName: "home" */ '@/views/common/Home.vue'),
 	children: [{
 		meta: {
-			title: 'DragDialog',
+			title: '弹框拖拽',
 			routeActive: '/dragDialog',
 			permission: []
 		},
@@ -55,12 +55,39 @@ const asyncRouterMap = [{
 	},
 	{
 		meta: {
-			title: 'tinymceEditor',
+			title: '富文本',
 			routeActive: '/tinymceEditor',
 			permission: []
 		},
 		path: '/tinymceEditor',
 		component: () => import( /* webpackChunkName: "Icon" */ '@/views/devFile/TinymceEditor.vue')
+	},
+	{
+		meta: {
+			title: '列表拖拽',
+			routeActive: '/tableDrag',
+			permission: []
+		},
+		path: '/tableDrag',
+		component: () => import( /* webpackChunkName: "Icon" */ '@/views/devFile/TableDrag.vue')
+	},
+	{
+		meta: {
+			title: 'sticky',
+			routeActive: '/sticky',
+			permission: []
+		},
+		path: '/sticky',
+		component: () => import( /* webpackChunkName: "Icon" */ '@/views/devFile/Sticky.vue')
+	},
+	{
+		meta: {
+			title: 'test',
+			routeActive: '/test',
+			permission: []
+		},
+		path: '/test',
+		component: () => import( /* webpackChunkName: "Icon" */ '@/views/devFile/Test.vue')
 	}
 	]
 }, ];
