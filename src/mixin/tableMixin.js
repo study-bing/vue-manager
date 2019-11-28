@@ -2,7 +2,8 @@ export default {
 	data() {
 		return {
 			tableHeight: 0,
-			currentPage: 1,
+			multipleSelection: [],
+			heightFix: 170
 		};
 	},
 	components: {
@@ -15,9 +16,15 @@ export default {
      * @date   2019-11-13
      * @param  {Object}   heightFix：修正的高度
      */
-		setHeight(heightFix = 260) {
-			let bodyHeight = document.body.clientHeight || document.documentElement.clientHeight;
-			this.tableHeight = bodyHeight - heightFix;
+		setHeight() {
+			this.tableHeight = document.body.clientHeight || document.documentElement.clientHeight;
+			if (this.$refs.searchBody) {
+				this.tableHeight = this.tableHeight - this.$refs.searchBody.clientHeight;
+			}
+			if (this.$refs.opeBtns) {
+				this.tableHeight = this.tableHeight - this.$refs.searchBody.clientHeight;
+			}
+			this.tableHeight = this.tableHeight - this.heightFix;
 		},
 		/**
      * 页面条数改变...
@@ -26,7 +33,8 @@ export default {
      * @param  {Object}   val：条数
      */
 		handleSizeChange(val) {
-			console.log(`每页 ${val} 条`);
+			this.tableParams.page_size = val;
+			this.getData();
 		},
 		/**
      * 页数改变...
@@ -35,10 +43,27 @@ export default {
      * @param  {Object}   val：页数
      */
 		handleCurrentChange(val) {
-			console.log(`当前页: ${val}`);
+			this.tableParams.page = val;
+			this.getData();
 		},
+		/**
+     * table的checkBox
+     * @author linbin
+     * @date   2019-11-13
+     * @param  {Object}   row行信息
+     */
+		handleSelectionChange(val) {
+			this.multipleSelection = val;
+		}
 	},
 	created() {
-
-	}
+		this.getData();
+	},
+	mounted() {
+		window.addEventListener('resize', this.setHeight, false);
+		this.setHeight();
+	},
+	beforeDestroy() {
+		window.removeEventListener('resize', this.setHeight, false);
+	},
 };

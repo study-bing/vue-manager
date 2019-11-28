@@ -183,13 +183,32 @@ a {
 
 /*搜索*/
 .search-content {
-  margin-bottom: 20px;
   position: relative;
+  padding-right: 160px;
 
   >div {
-    margin-right: 16px;
-    margin-bottom: 16px;
+    display: inline-block;
+    margin-right: 24px;
+    margin-bottom: 8px;
+
+    .label {
+      color: #000000;
+      font-size: 14px;
+      margin-right: 8px;
+    }
   }
+
+  /*查询按钮*/
+  .search-btns {
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+}
+
+/*功能按钮*/
+.ope-btns {
+  margin-bottom: 12px;
 }
 
 /*右边按钮*/
@@ -285,4 +304,16 @@ a {
 
 .w200 {
   width: 200px !important;
+}
+
+.w-160 {
+  width: 160px !important;
+}
+
+.w-240 {
+  width: 240px !important;
+}
+
+.el-date-editor .el-range-separator {
+  width: auto;
 }

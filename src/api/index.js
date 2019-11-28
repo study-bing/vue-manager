@@ -1,6 +1,10 @@
 import axios from 'axios';
-import router from '../router';
-import { Message } from 'element-ui';
+import {
+	router
+} from '../router';
+import {
+	Message
+} from 'element-ui';
 const service = axios.create({
 	// 设置超时时间
 	timeout: 60000,
@@ -17,7 +21,7 @@ const service = axios.create({
  */
 service.interceptors.request.use(config => {
 	const token = localStorage.getItem('token');
-	if (token){
+	if (token) {
 		config.headers['Authorization'] = token;
 	}
 	return config;
@@ -32,17 +36,20 @@ service.interceptors.response.use(response => {
 	const responseCode = response.status;
 	// 如果返回的状态码为200，说明接口请求成功，可以正常拿到数据
 	// 否则的话抛出错误
-	if (responseCode === 200){
-		return Promise.resolve(response);
-	}
-	else {
+	if (responseCode === 200) {
+		return Promise.resolve(response.data);
+	} else {
+		this.$message({
+			message: '系统错误',
+			type: 'warning'
+		});
 		return Promise.reject(response);
 	}
 }, error => {
 	// 服务器返回不是 2 开头的情况，会进入这个回调
 	// 可以根据后端返回的状态码进行不同的操作
 	const responseCode = error.response.status;
-	switch (responseCode){
+	switch (responseCode) {
 		// 401：未登录
 		case 401:
 			// 跳转登录页

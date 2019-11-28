@@ -74,7 +74,8 @@
 <script>
 import dialogMixin from '@mixin/dialogMixin';
 import { parse } from '@utils';
-// import { addBanner, editBanner } from '@api/scenic.js';
+import { addBanner, editBanner } from '@api/scenic.js';
+import { mapGetters } from 'vuex';
 export default {
 	name: 'setScenicBanner',
 	data() {
@@ -123,7 +124,9 @@ export default {
 			}
 		}
 	},
-	computed: {},
+	computed: {
+		...mapGetters(['imgBase'])
+	},
 	methods: {
 		/**
      * 关闭弹框
@@ -143,20 +146,20 @@ export default {
 					return false;
 				}
 				if (valid) {
-					// let action = addBanner;
-					// let message = '新增成功';
-					// if (this.isEdit) {
-					// 	action = editBanner;
-					// 	message = '编辑成功';
-					// }
-					// action(this.ruleForm).then(() => {
-					// 	this.visible = false;
-					// 	this.changeDialogVisible();
-					// 	this.$message({
-					// 		message: message,
-					// 		type: 'success'
-					// 	});
-					// });
+					let action = addBanner;
+					let message = '新增成功';
+					if (this.isEdit) {
+						action = editBanner;
+						message = '编辑成功';
+					}
+					action(this.ruleForm).then(() => {
+						this.visible = false;
+						this.changeDialogVisible();
+						this.$message({
+							message: message,
+							type: 'success'
+						});
+					});
 				} else {
 					console.log('error submit!!');
 					return false;

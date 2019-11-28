@@ -78,10 +78,18 @@
       layout="total, prev, pager, next, sizes, jumper"
       :total="total"
     ></el-pagination>
+    <scenic-banner-set
+      :isEdit="idEdit"
+      :infoObj="infoObj"
+      :dialogVisible.sync="showSet"
+      @closeDialog="getData"
+    ></scenic-banner-set>
   </div>
 </template>
 <script>
 import tableMixin from '@mixin/tableMixin';
+import scenicBannerSet from './ScenicBannerSet';
+import { getBannerList, deleteBanner } from '@api/scenic.js';
 export default {
 	name: 'bannerList',
 	data() {
@@ -111,6 +119,7 @@ export default {
 			total: 0
 		};
 	},
+	components: { scenicBannerSet },
 	mixins: [tableMixin],
 	methods: {
 		/**
@@ -137,7 +146,22 @@ export default {
      * @author linbin
      * @date   2019-11-13
      */
-		getData() {},
+		getData() {
+			getBannerList({
+				keyword: this.tableParams.keyword,
+				create_admin: this.tableParams.create_admin,
+				status: this.tableParams.status,
+				start_time_range_l: this.tableParams.startTime[0] || '',
+				start_time_range_r: this.tableParams.startTime[1] || '',
+				end_time_range_l: this.tableParams.endTime[0] || '',
+				end_time_range_r: this.tableParams.endTime[1] || '',
+				page: this.tableParams.page,
+				page_size: this.tableParams.page_size
+			}).then(res => {
+				this.total = res.data.total;
+				this.tableData = res.data.items;
+			});
+		},
 		/**
      * 清除筛选选项
      * @author linbin
@@ -160,11 +184,11 @@ export default {
      * @date   2019-11-13
      * @param  {Object}   row行信息
      */
-		scenicDelete() {
-			// let ids = this.multipleSelection;
-			// if (row.id) {
-			// 	ids = [row.id];
-			// }
+		scenicDelete(row) {
+			let ids = this.multipleSelection;
+			if (row.id) {
+				ids = [row.id];
+			}
 			this.$confirm('是否确认删除Banner?', '', {
 				confirmButtonText: '确定',
 				cancelButtonText: '取消',
@@ -172,13 +196,13 @@ export default {
 				showClose: false
 			})
 			.then(() => {
-				// deleteBanner({ ids: ids }).then(() => {
-				// 	this.$message({
-				// 		type: 'success',
-				// 		message: '删除成功!'
-				// 	});
-				// 	this.getData();
-				// });
+				deleteBanner({ ids: ids }).then(() => {
+					this.$message({
+						type: 'success',
+						message: '删除成功!'
+					});
+					this.getData();
+				});
 			})
 			.catch(() => {});
 		}

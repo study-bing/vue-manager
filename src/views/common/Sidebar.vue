@@ -60,7 +60,7 @@ export default {
 				},
 				{
 					icon: 'el-icon-document',
-					index: '1',
+					index: '12',
 					title: '景区管理',
 					subs: [
 						{
@@ -68,15 +68,10 @@ export default {
 							title: '景区列表'
 						},
 						{
-							index: '/scenic/orderList',
-							title: '订单管理'
+							index: '/scenic/bannerList',
+							title: 'Banner管理'
 						}
 					]
-				},
-				{
-					icon: 'el-icon-user',
-					index: '/user',
-					title: '用户管理'
 				}
 			]
 		};

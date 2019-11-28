@@ -7,27 +7,28 @@ module.exports = {
 			alias: {
 				'@utils': path.resolve('./src/modules/utils'),
 				'@mixin': path.resolve('./src/mixin/'),
-				'@comp': path.resolve('./src/components/')
+				'@comp': path.resolve('./src/components/'),
+				'@api': path.resolve('./src/api/')
 			}
 		}
 	}),
 	chainWebpack: config => {
-    // set svg-sprite-loader
-    config.module
-      .rule('svg')
-      .exclude.add(path.resolve('./src/assets/svg'))
-      .end()
-    config.module
-      .rule('assets')
-      .test(/\.svg$/)
-      .include.add(path.resolve('./src/assets/svg'))
-      .end()
-      .use('svg-sprite-loader')
-      .loader('svg-sprite-loader')
-      .options({
-        symbolId: 'icon-[name]'
-      })
-      .end()
+		// set svg-sprite-loader
+		config.module
+		.rule('svg')
+		.exclude.add(path.resolve('./src/assets/svg'))
+		.end();
+		config.module
+		.rule('assets')
+		.test(/\.svg$/)
+		.include.add(path.resolve('./src/assets/svg'))
+		.end()
+		.use('svg-sprite-loader')
+		.loader('svg-sprite-loader')
+		.options({
+			symbolId: 'icon-[name]'
+		})
+		.end();
 		// 这里是对环境的配置，不同环境对应不同的BASE_URL，以便axios的请求地址不同
 		config.plugin('define').tap(args => {
 			args[0]['process.env'].BASE_URL = JSON.stringify(process.env.BASE_URL);

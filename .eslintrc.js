@@ -17,8 +17,11 @@ module.exports = {
       }
     ],
     "quotes": ["error", "single"],
+    "no-console": 'off', //禁止使用console
     'generator-star-spacing': 'off', // allow async-await
-    "camelcase": 2, //强制驼峰法命名
+    'camelcase': ['error', {
+      'properties': 'never'
+    }], //强制驼峰法命名
     "eqeqeq": "error", //  #使用带引号替代双引号 
     "prettier.singleQuote": true,
     "no-extend-native": 2, //禁止扩展native对象

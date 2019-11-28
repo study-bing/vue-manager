@@ -8,17 +8,7 @@ export default [{
 		},
 		path: '/dashboard',
 		component: () => import( /* webpackChunkName: "home" */ '@/views/dashboard/Dashboard.vue')
-	},
-	{
-		meta: {
-			title: '用户管理',
-			routeActive: '/user',
-		},
-		path: '/user',
-		component: () => import( /* webpackChunkName: "home" */ '@/views/user/User.vue')
-	},
-
-	],
+	}, ],
 },
 {
 	path: '',
@@ -45,27 +35,11 @@ export default [{
 	},
 	{
 		meta: {
-			title: '门票管理',
-			routeActive: '/scenic/scenicList',
+			title: 'Banner管理',
+			routeActive: '/scenic/bannerList',
 		},
-		path: '/scenic/ticketList',
-		component: () => import( /* webpackChunkName: "home" */ '@/views/scenic/scenicTicket/ScenicTicketList.vue')
-	},
-	{
-		meta: {
-			title: '订单管理',
-			routeActive: '/order',
-		},
-		path: '/scenic/orderList',
-		component: () => import( /* webpackChunkName: "home" */ '@/views/scenic/orderManager/OrderList.vue')
-	},
-	{
-		meta: {
-			title: '订单详情',
-			routeActive: '/order',
-		},
-		path: '/orderDetail/:id',
-		component: () => import( /* webpackChunkName: "home" */ '@/views/scenic/orderManager/OrderDetail.vue')
+		path: '/scenic/bannerList',
+		component: () => import( /* webpackChunkName: "home" */ '@/views/scenic/scenicBanner/ScenicBannerList.vue')
 	},
 	]
 },
