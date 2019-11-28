@@ -106,11 +106,6 @@ export default {
 	watch: {
 		dialogVisible() {
 			this.fileList = [];
-			if (this.isEdit) {
-				this.ruleForm = parse(this.infoObj);
-				this.$set(this.ruleForm, 'banner_path', this.ruleForm.path);
-				this.fileList = [{ url: `${this.imgBase}${this.ruleForm.path}` }];
-			}
 			if (this.$refs['ruleForm']) {
 				this.ruleForm = {
 					title: '',
@@ -121,6 +116,11 @@ export default {
 				};
 				this.fileList = [];
 				this.$refs['ruleForm'].resetFields();
+			}
+			if (this.isEdit) {
+				this.ruleForm = parse(this.infoObj);
+				this.$set(this.ruleForm, 'banner_path', this.ruleForm.path);
+				this.fileList = [{ url: `${this.imgBase}${this.ruleForm.path}` }];
 			}
 		}
 	},
