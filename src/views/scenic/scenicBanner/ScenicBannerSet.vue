@@ -146,22 +146,28 @@ export default {
 					return false;
 				}
 				if (valid) {
+					this.loading = true;
 					let action = addBanner;
 					let message = '新增成功';
 					if (this.isEdit) {
 						action = editBanner;
 						message = '编辑成功';
 					}
-					action(this.ruleForm).then(() => {
+					action(this.ruleForm)
+					.then(() => {
 						this.visible = false;
 						this.changeDialogVisible();
 						this.$message({
 							message: message,
 							type: 'success'
 						});
+						this.loading = false;
+					})
+					.then(() => {
+						this.loading = false;
 					});
 				} else {
-					console.log('error submit!!');
+					this.loading = false;
 					return false;
 				}
 			});

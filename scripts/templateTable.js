@@ -44,7 +44,7 @@ module.exports = {
       </div>
       <div class="ope-btns" ref="opeBtns">
         <el-button size="medium" @click="add${compoenntName}">添加${compoenntName}</el-button>
-        <el-button size="medium" @click="delete${compoenntName}">批量删除</el-button>
+        <el-button size="medium" :loading="tableLoading" @click="delete${compoenntName}">批量删除</el-button>
       </div>
       <el-table
         :data="tableData"
@@ -53,6 +53,7 @@ module.exports = {
         v-if="tableHeight > 0"
         @selection-change="handleSelectionChange"
         :highlight-current-row="false"
+        v-loading="tableLoading"
       >
         <el-table-column type="selection" width="60"></el-table-column>
         <el-table-column prop="title" label="标题"></el-table-column>
@@ -120,10 +121,15 @@ export default {
      * @date   2019-11-13
      */
 		getData() {
+      this.tableLoading = true;
 			// getBannerList({
 			// }).then(res => {
 			// 	this.total = res.data.total;
 			// 	this.tableData = res.data.items;
+			// 	this.tableLoading = false;
+			// })
+			// .then(() => {
+			// 	this.tableLoading = false;
 			// });
 		},
     /**
@@ -148,19 +154,31 @@ export default {
      * @param  {Object}   row行信息
      */
 		delete${compoenntName}(row) {
+      if (this.tableLoading) {
+				return false;
+			}
 			this.$confirm('您确定删除此景区吗?', '提示', {
 				confirmButtonText: '确定',
 				cancelButtonText: '取消',
 				type: 'warning'
 			})
 			.then(() => {
+        this.tableLoading = true;
         // deleteBanner({ ids: ids }).then(() => {
 				// 	this.$message({
 				// 		type: 'success',
 				// 		message: '删除成功!'
 				// 	});
 				// 	this.getData();
-				// });
+        // 	this.tableLoading = false;
+        // 	})
+        // 	.then(() => {
+        // 		this.tableLoading = false;
+        // 	});
+        // })
+        // .catch(() => {
+        // 	this.tableLoading = false;
+        // });
 			})
 			.catch(() => {
 				this.$message({

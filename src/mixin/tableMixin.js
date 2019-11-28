@@ -3,7 +3,8 @@ export default {
 		return {
 			tableHeight: 0,
 			multipleSelection: [],
-			heightFix: 170
+			heightFix: 220,
+			tableLoading: false
 		};
 	},
 	components: {
@@ -22,7 +23,7 @@ export default {
 				this.tableHeight = this.tableHeight - this.$refs.searchBody.clientHeight;
 			}
 			if (this.$refs.opeBtns) {
-				this.tableHeight = this.tableHeight - this.$refs.searchBody.clientHeight;
+				this.tableHeight = this.tableHeight - this.$refs.opeBtns.clientHeight;
 			}
 			this.tableHeight = this.tableHeight - this.heightFix;
 		},

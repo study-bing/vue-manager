@@ -2,6 +2,7 @@ export default {
 	data() {
 		return {
 			visible: false,
+			loading: false,
 		};
 	},
 	props: {
