@@ -92,7 +92,7 @@ export default {
 	data(){
 		return{
       tableData: [],
-			total: 0
+			total: 0,
 			typeOptions: [
 				{
 					value: 'on',
@@ -122,13 +122,12 @@ export default {
      */
 		getData() {
       this.tableLoading = true;
-			// getBannerList({
-			// }).then(res => {
+			// getBannerList(this.tableParams).then(res => {
 			// 	this.total = res.data.total;
 			// 	this.tableData = res.data.items;
 			// 	this.tableLoading = false;
 			// })
-			// .then(() => {
+			// .catch(() => {
 			// 	this.tableLoading = false;
 			// });
 		},
@@ -138,14 +137,7 @@ export default {
      * @date   2019-11-13
      * @param  {Object}   row行信息
      */
-		toDetail(row) {
-			console.log(row);
-			this.$router.push({
-				path: ` / scenicDetail / $ {
-      Math.random() * 100
-    }
-    `
-			});
+		toDetail() {
     },
     /**
      * 删除操作
@@ -157,14 +149,15 @@ export default {
       if (this.tableLoading) {
 				return false;
 			}
-			this.$confirm('您确定删除此景区吗?', '提示', {
+			this.$confirm('您确定删除此景区吗?', '', {
 				confirmButtonText: '确定',
 				cancelButtonText: '取消',
-				type: 'warning'
+				type: 'error',
+				showClose: false
 			})
 			.then(() => {
         this.tableLoading = true;
-        // deleteBanner({ ids: ids }).then(() => {
+        // deleteBanner({ id: row.id }).then(() => {
 				// 	this.$message({
 				// 		type: 'success',
 				// 		message: '删除成功!'
@@ -172,9 +165,9 @@ export default {
 				// 	this.getData();
         // 	this.tableLoading = false;
         // 	})
-        // 	.then(() => {
-        // 		this.tableLoading = false;
-        // 	});
+        // 	.catch(() => {
+          this.tableLoading = false;
+        });
         // })
         // .catch(() => {
         // 	this.tableLoading = false;

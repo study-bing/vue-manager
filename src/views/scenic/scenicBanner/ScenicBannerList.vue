@@ -79,7 +79,7 @@
       :total="total"
     ></el-pagination>
     <scenic-banner-set
-      :isEdit="idEdit"
+      :isEdit="isEdit"
       :infoObj="infoObj"
       :dialogVisible.sync="showSet"
       @closeDialog="getData"
@@ -114,7 +114,7 @@ export default {
 				page: 1,
 				page_size: 10
 			},
-			idEdit: false,
+			isEdit: false,
 			infoObj: {},
 			total: 0
 		};
@@ -128,7 +128,7 @@ export default {
      * @date   2019-11-13
      */
 		addBanner() {
-			this.idEdit = false;
+			this.isEdit = false;
 			this.showSet = true;
 		},
 		/**
@@ -137,7 +137,7 @@ export default {
      * @date   2019-11-13
      */
 		editBanner(row) {
-			this.idEdit = true;
+			this.isEdit = true;
 			this.showSet = true;
 			this.infoObj = row;
 		},

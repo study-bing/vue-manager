@@ -81,109 +81,109 @@
   </div>
 </template>
 <script>
-import tableMixin from '@mixin/tableMixin';
+import tableMixin from "@mixin/tableMixin";
 export default {
-	name: 'bannerList',
-	data() {
-		return {
-			tableData: [],
-			showSet: false,
-			typeOptions: [
-				{
-					value: 'on',
-					label: '上线'
-				},
-				{
-					value: 'off',
-					label: '下线'
-				}
-			],
-			tableParams: {
-				keyword: '',
-				status: '',
-				startTime: [],
-				endTime: [],
-				page: 1,
-				page_size: 10
-			},
-			idEdit: false,
-			infoObj: {},
-			total: 0
-		};
-	},
-	mixins: [tableMixin],
-	methods: {
-		/**
+  name: "bannerList",
+  data() {
+    return {
+      tableData: [],
+      showSet: false,
+      typeOptions: [
+        {
+          value: "on",
+          label: "上线"
+        },
+        {
+          value: "off",
+          label: "下线"
+        }
+      ],
+      tableParams: {
+        keyword: "",
+        status: "",
+        startTime: [],
+        endTime: [],
+        page: 1,
+        page_size: 10
+      },
+      isEdit: false,
+      infoObj: {},
+      total: 0
+    };
+  },
+  mixins: [tableMixin],
+  methods: {
+    /**
      * 新增bannner
      * @author linbin
      * @date   2019-11-13
      */
-		addBanner() {
-			this.idEdit = false;
-			this.showSet = true;
-		},
-		/**
+    addBanner() {
+      this.isEdit = false;
+      this.showSet = true;
+    },
+    /**
      * 编辑bannner
      * @author linbin
      * @date   2019-11-13
      */
-		editBanner(row) {
-			this.idEdit = true;
-			this.showSet = true;
-			this.infoObj = row;
-		},
-		/**
+    editBanner(row) {
+      this.isEdit = true;
+      this.showSet = true;
+      this.infoObj = row;
+    },
+    /**
      * 获取数据
      * @author linbin
      * @date   2019-11-13
      */
-		getData() {},
-		/**
+    getData() {},
+    /**
      * 清除筛选选项
      * @author linbin
      * @date   2019-11-13
      */
-		clearParams() {
-			this.tableParams = {
-				keyword: '',
-				status: '',
-				startTime: [],
-				endTime: [],
-				page: 1,
-				page_size: 10
-			};
-			this.getData();
-		},
-		/**
+    clearParams() {
+      this.tableParams = {
+        keyword: "",
+        status: "",
+        startTime: [],
+        endTime: [],
+        page: 1,
+        page_size: 10
+      };
+      this.getData();
+    },
+    /**
      * 删除banner操作
      * @author linbin
      * @date   2019-11-13
      * @param  {Object}   row行信息
      */
-		scenicDelete() {
-			// let ids = this.multipleSelection;
-			// if (row.id) {
-			// 	ids = [row.id];
-			// }
-			this.$confirm('是否确认删除Banner?', '', {
-				confirmButtonText: '确定',
-				cancelButtonText: '取消',
-				type: 'error',
-				showClose: false
-			})
-			.then(() => {
-				// deleteBanner({ ids: ids }).then(() => {
-				// 	this.$message({
-				// 		type: 'success',
-				// 		message: '删除成功!'
-				// 	});
-				// 	this.getData();
-				// });
-			})
-			.catch(() => {});
-		}
-	},
-	mounted() {}
+    scenicDelete() {
+      // let ids = this.multipleSelection;
+      // if (row.id) {
+      // 	ids = [row.id];
+      // }
+      this.$confirm("是否确认删除Banner?", "", {
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        type: "error",
+        showClose: false
+      })
+        .then(() => {
+          // deleteBanner({ ids: ids }).then(() => {
+          // 	this.$message({
+          // 		type: 'success',
+          // 		message: '删除成功!'
+          // 	});
+          // 	this.getData();
+          // });
+        })
+        .catch(() => {});
+    }
+  },
+  mounted() {}
 };
 </script>
 <style lang="less" scoped>
