@@ -131,7 +131,7 @@ export default {
 		handleClick(row) {
 			console.log(row);
 		},
-		async getList() {
+		async getData() {
 			this.oldList = this.tableData.map(v => v.id);
 			this.newList = this.oldList.slice();
 			this.$nextTick(() => {
@@ -155,10 +155,7 @@ export default {
 			});
 		}
 	},
-	mounted() {
-		this.setHeight();
-		this.getList();
-	}
+	mounted() {}
 };
 </script>
 <style>
