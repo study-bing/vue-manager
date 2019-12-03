@@ -64,10 +64,6 @@ export default {
 					title: '景区管理',
 					subs: [
 						{
-							index: '/scenic/scenicList',
-							title: '景区列表'
-						},
-						{
 							index: '/scenic/bannerList',
 							title: 'Banner管理'
 						}
@@ -112,6 +108,10 @@ export default {
 					{
 						index: '/sticky',
 						title: 'sticky'
+					},
+					{
+						index: '/cropUpload',
+						title: '图片上传'
 					},
 					{
 						index: '/test',

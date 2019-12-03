@@ -82,6 +82,15 @@ const asyncRouterMap = [{
 	},
 	{
 		meta: {
+			title: '图片上传',
+			routeActive: '/cropUpload',
+			permission: []
+		},
+		path: '/cropUpload',
+		component: () => import( /* webpackChunkName: "Icon" */ '@/views/devFile/CropUpload.vue')
+	},
+	{
+		meta: {
 			title: 'test',
 			routeActive: '/test',
 			permission: []
