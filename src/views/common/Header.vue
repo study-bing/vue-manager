@@ -60,7 +60,7 @@ export default {
 	// components: { breadcrumb },
 	computed: {
 		username() {
-			let username = sessionStorage.getItem('ms_username');
+			let username = localStorage.getItem('nickname');
 			return username ? username : this.name;
 		}
 	},
@@ -72,7 +72,7 @@ export default {
      */
 		handleCommand(command) {
 			if (command === 'loginout') {
-				sessionStorage.removeItem('ms_username');
+				localStorage.removeItem('nickname');
 				this.$router.push('/');
 			}
 		},

@@ -5,7 +5,7 @@
       <el-form :model="param" :rules="rules" ref="login" label-width="0px" class="ms-content">
         <el-form-item prop="username">
           <el-input v-model="param.username" placeholder="username">
-            <el-button slot="prepend" icon="el-icon-lx-people"></el-button>
+            <svg-icon slot="prepend" icon-class="user"></svg-icon>
           </el-input>
         </el-form-item>
         <el-form-item prop="password">
@@ -15,7 +15,8 @@
             v-model="param.password"
             @keyup.enter.native="submitForm()"
           >
-            <el-button slot="prepend" icon="el-icon-lx-lock"></el-button>
+            <!-- <el-button slot="prepend" icon="el-icon-lx-lock"></el-button> -->
+            <svg-icon slot="prepend" icon-class="lock"></svg-icon>
           </el-input>
         </el-form-item>
         <div class="login-btn">
@@ -53,7 +54,7 @@ export default {
 			this.$refs.login.validate(valid => {
 				if (valid) {
 					this.$message.success('登录成功');
-					sessionStorage.setItem('ms_username', this.param.username);
+					localStorage.setItem('nickname', this.param.username);
 					this.$router.push('/');
 				} else {
 					this.$message.error('请输入账号和密码');
@@ -65,12 +66,15 @@ export default {
 };
 </script>
 
-<style scoped>
+<style scoped lang="less">
 .login-wrap {
   position: relative;
   width: 100%;
   height: 100%;
   background-color: #5e5c5c;
+  .svg-icon {
+    margin-right: 0;
+  }
 }
 .ms-title {
   width: 100%;

@@ -3,7 +3,7 @@ export default {
 		return {
 			tableHeight: 0,
 			multipleSelection: [],
-			heightFix: 220,
+			heightFix: 230,
 			tableLoading: false
 		};
 	},

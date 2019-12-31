@@ -2,10 +2,10 @@ import Vue from 'vue';
 import Router from 'vue-router';
 import store from '../vuex/index';
 
-//手动跳转的页面白名单
-// const whiteList = [
-// 	'/'
-// ];
+// 手动跳转的页面白名单
+const whiteList = [
+	'/login'
+];
 const originalPush = Router.prototype.push;
 Router.prototype.push = function push(location) {
 	return originalPush.call(this, location).catch(err => err);
@@ -141,44 +141,43 @@ function routerMatch(permission, asyncRouter) {
 }
 // router/index.js
 router.beforeEach((to, form, next) => {
-	// if (sessionStorage.getItem('token')) {
-	if (to.path === '/') {
-		router.replace('/dashboard');
-	} else {
-		if (store.state.routeList.length === 0) {
-			// 如果没有权限列表，将重新向后台请求一次
-			let list = [{
-				permission: ['all'],
-				path: '/dragDialog'
-			}, {
-				permission: [],
-				path: '/icon'
-			}];
-			store.dispatch('setRouteList', list);
-			// 调用权限匹配的方法;
-			console.log(to);
-			routerMatch(list, asyncRouterMap).then(res => {
-				//将匹配出来的权限列表进行addRoutes
-				router.addRoutes(res[0]);
-				router.addRoutes([{
-					path: '*',
-					redirect: '/dashboard'
-				}]);
-				next(to.path);
-			});
+	if (localStorage.getItem('nickname')) {
+		if (to.path === '/') {
+			router.replace('/dashboard');
 		} else {
-			if (to.matched.length) {
-				next();
+			if (store.state.routeList.length === 0) {
+				// 如果没有权限列表，将重新向后台请求一次
+				let list = [{
+					permission: ['all'],
+					path: '/dragDialog'
+				}, {
+					permission: [],
+					path: '/icon'
+				}];
+				store.dispatch('setRouteList', list);
+				// 调用权限匹配的方法;
+				routerMatch(list, asyncRouterMap).then(res => {
+					//将匹配出来的权限列表进行addRoutes
+					router.addRoutes(res[0]);
+					router.addRoutes([{
+						path: '*',
+						redirect: '/dashboard'
+					}]);
+					next(to.path);
+				});
 			} else {
-				router.replace('/');
+				if (to.matched.length) {
+					next();
+				} else {
+					router.replace('/login');
+				}
 			}
 		}
+	} else {
+		if (whiteList.indexOf(to.path) >= 0) {
+			next();
+		} else {
+			router.replace('/login');
+		}
 	}
-	// } else {
-	// 	if (whiteList.indexOf(to.path) >= 0) {
-	// 		next();
-	// 	} else {
-	// 		router.replace('/');
-	// 	}
-	// }
 });
