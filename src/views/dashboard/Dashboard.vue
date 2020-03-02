@@ -192,7 +192,7 @@ export default {
 		}
 	},
 	created() {
-		this.name = sessionStorage.getItem('ms_username');
+		this.name = localStorage.getItem('nickname');
 		this.changeDate();
 	},
 	methods: {

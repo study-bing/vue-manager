@@ -55,6 +55,16 @@ export default {
      */
 		handleSelectionChange(val) {
 			this.multipleSelection = val;
+		},
+		/**
+     * 搜索重置页数...
+     * @author linbin
+     * @date   2020-01-21
+     * @param  {Object}   val：页数
+     */
+		searchData() {
+			this.tableParams.page = 1;
+			this.getData();
 		}
 	},
 	created() {

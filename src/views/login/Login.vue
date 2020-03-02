@@ -15,7 +15,6 @@
             v-model="param.password"
             @keyup.enter.native="submitForm()"
           >
-            <!-- <el-button slot="prepend" icon="el-icon-lx-lock"></el-button> -->
             <svg-icon slot="prepend" icon-class="lock"></svg-icon>
           </el-input>
         </el-form-item>

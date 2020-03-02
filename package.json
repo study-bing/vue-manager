@@ -10,7 +10,8 @@
     "new:view": "node ./scripts/generateView",
     "new:tView": "node ./scripts/generateTableView",
     "lazybuild": "./shell/lazy-build.sh",
-    "prelazybuild": "./shell/build.sh"
+    "prelazybuild": "./shell/build.sh",
+    "test": "vue-cli-service build --mode test"
   },
   "dependencies": {
     "@tinymce/tinymce-vue": "^3.0.1",
@@ -44,6 +45,8 @@
     "sass-loader": "^8.0.0",
     "svg-sprite-loader": "^4.1.6",
     "vue-template-compiler": "^2.6.10",
-    "webpack-cli": "^3.3.10"
+    "webpack-cli": "^3.3.10",
+    "ts-loader": "^6.2.1",
+    "typescript": "^3.7.3"
   }
 }

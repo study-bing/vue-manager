@@ -35,7 +35,7 @@
         </el-select>
       </div>
       <div class="search-btns">
-        <el-button size="medium" type="primary" @click="getData">查询</el-button>
+        <el-button size="medium" type="primary" @click="searchData">查询</el-button>
         <el-button size="medium" @click="clearParams">清除</el-button>
       </div>
     </div>
