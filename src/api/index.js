@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import axios from 'axios'
 import { router } from '../router'
-import { Message } from 'view-design'
+import { Message } from 'element-ui'
 let baseURL = window.location.origin
 localStorage.setItem('baseURL', baseURL)
 const service = axios.create({
