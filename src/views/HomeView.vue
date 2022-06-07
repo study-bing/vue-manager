@@ -9,6 +9,7 @@
         <el-select v-model="value" placeholder="请选择">
             <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value"> </el-option>
         </el-select>
+        <div class="less-test flex-c">测试全局less</div>
     </div>
 </template>
 
@@ -44,3 +45,10 @@ export default {
     },
 }
 </script>
+<style lang="less" scoped>
+.less-test {
+    color: @color-text-primary;
+    .border-top();
+    .margin-left-xl;
+}
+</style>

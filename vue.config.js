@@ -5,8 +5,15 @@ const path = require('path')
 function resolve(dir) {
     return path.join(__dirname, dir) //path.join(_dirname)设置绝对路径
 }
+
 module.exports = defineConfig({
     transpileDependencies: true,
+    pluginOptions: {
+        'style-resources-loader': {
+            preProcessor: 'less',
+            patterns: [resolve('src/style/variables.less')],
+        },
+    },
     configureWebpack: (config) => {
         if (process.env.NODE_ENV === 'production') {
             config.plugins.push(

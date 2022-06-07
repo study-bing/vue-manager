@@ -10,6 +10,8 @@ import './plugins/element'
 import './plugins/commonUse'
 // 引入svg
 import './assets/icons/index'
+// 引入样式
+import './style/index.less'
 Vue.config.productionTip = false
 new Vue({
     router,
