@@ -1,103 +1,71 @@
-// vue.config.js
-const CompressionPlugin = require('compression-webpack-plugin');
-const path = require('path');
-module.exports = {
-	configureWebpack: () => ({
-		resolve: {
-			alias: {
-				'@utils': path.resolve('./src/modules/utils'),
-				'@mixin': path.resolve('./src/mixin/'),
-				'@comp': path.resolve('./src/components/'),
-				'@api': path.resolve('./src/api/')
-			}
-		}
-	}),
-	chainWebpack: config => {
-		// set svg-sprite-loader
-		config.module
-		.rule('svg')
-		.exclude.add(path.resolve('./src/assets/svg'))
-		.end();
-		config.module
-		.rule('assets')
-		.test(/\.svg$/)
-		.include.add(path.resolve('./src/assets/svg'))
-		.end()
-		.use('svg-sprite-loader')
-		.loader('svg-sprite-loader')
-		.options({
-			symbolId: 'icon-[name]'
-		})
-		.end();
-		// 这里是对环境的配置，不同环境对应不同的BASE_URL，以便axios的请求地址不同
-		config.plugin('define').tap(args => {
-			args[0]['process.env'].BASE_URL = JSON.stringify(process.env.BASE_URL);
-			args[0]['process.env'].API_KEY = JSON.stringify(process.env.API_KEY);
-			return args;
-		});
-		if (process.env.NODE_ENV === 'production') {
-			// #region 启用GZip压缩
-			config
-			.plugin('compression')
-			.use(CompressionPlugin, {
-				asset: '[path].gz[query]',
-				algorithm: 'gzip',
-				test: new RegExp('\\.(' + ['js', 'css'].join('|') + ')$'),
-				threshold: 10240,
-				minRatio: 0.8,
-				cache: true
-			})
-			.tap(args => {});
-
-			// #endregion
-
-			// #region 忽略生成环境打包的文件
-
-			var externals = {
-				'vue': 'Vue',
-				'axios': 'axios',
-				'element-ui': 'ELEMENT',
-				'vue-router': 'VueRouter',
-				'vuex': 'Vuex'
-			};
-			config.externals(externals);
-			const cdn = {
-				css: [
-					// element-ui css
-					'//unpkg.com/element-ui/lib/theme-chalk/index.css',
-					'//cdn.jsdelivr.net/npm/assembly-css/dist/assembly-css.min.css'
-				],
-				js: [
-					// vue
-					'//cdn.staticfile.org/vue/2.6.10/vue.min.js',
-					// vue-router
-					'//cdn.staticfile.org/vue-router/3.0.3/vue-router.min.js',
-					// vuex
-					'//cdn.staticfile.org/vuex/3.1.0/vuex.min.js',
-					// axios
-					'//cdn.staticfile.org/axios/0.19.0-beta.1/axios.min.js',
-					// element-ui js
-					'//unpkg.com/element-ui/lib/index.js'
-				]
-			};
-			config.plugin('html')
-			.tap(args => {
-				args[0].cdn = cdn;
-				return args;
-			});
-
-			// #endregion
-		}
-	},
-	devServer: {
-		proxy: {
-			'^/web/': {
-				target: 'http://project.hzsunong.cn/api/v3/',
-				ws: false,
-				pathRewrite: {
-					'^/web': '/'
-				}
-			}
-		}
-	}
-};
+const { defineConfig } = require('@vue/cli-service')
+const TerserPlugin = require('terser-webpack-plugin')
+const CompressionWebpackPlugin = require('compression-webpack-plugin')
+const path = require('path')
+function resolve(dir) {
+    return path.join(__dirname, dir) //path.join(_dirname)设置绝对路径
+}
+module.exports = defineConfig({
+    transpileDependencies: true,
+    configureWebpack: (config) => {
+        if (process.env.NODE_ENV === 'production') {
+            config.plugins.push(
+                new TerserPlugin({
+                    terserOptions: {
+                        compress: {
+                            drop_debugger: true, // console
+                            drop_console: true,
+                            pure_funcs: ['console.log'], // 移除console
+                        },
+                    },
+                    sourceMap: false,
+                    parallel: true,
+                })
+            )
+            config.plugins.push(
+                new CompressionWebpackPlugin({
+                    filename: '[file].gz[query]',
+                    algorithm: 'gzip',
+                    test: new RegExp('\\.(' + ['js', 'css'].join('|') + ')$'),
+                    threshold: 10240,
+                    minRatio: 0.8,
+                })
+            )
+        }
+    },
+    //压缩图片
+    chainWebpack: (config) => {
+        config.module.rule('svg').exclude.add(path.resolve('./src/assets/icons/svg')).end()
+        config.module
+            .rule('assets')
+            .test(/\.svg$/)
+            .include.add(path.resolve('./src/assets/icons/svg'))
+            .end()
+            .use('svg-sprite-loader')
+            .loader('svg-sprite-loader')
+            .options({
+                symbolId: 'icon-[name]',
+            })
+            .end()
+        config.resolve.alias
+            //第一个参数：别名 第二个参数：路径
+            .set('@components', resolve('src/components'))
+            .set('@api', resolve('src/api'))
+            .set('@views', resolve('src/views'))
+            .set('@modules', resolve('src/modules'))
+    },
+    devServer: {
+        historyApiFallback: true,
+        allowedHosts: 'all',
+        port: 8887,
+        proxy: {
+            '^/web/': {
+                target: 'http://121.40.139.139:108',
+                ws: false,
+                pathRewrite: {
+                    '^/web': '',
+                },
+            },
+        },
+    },
+})

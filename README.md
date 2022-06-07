@@ -1,51 +1,18 @@
-# mis
+# vue2-mobile-template
 
-## 项目项目
-
-### 安装依赖
-
+## Project setup
 ```
 npm install
 ```
 
-### development 模式启动
-
+### Compiles and hot-reloads for development
 ```
 npm run serve
 ```
 
-### production 模式构建
-
+### Compiles and minifies for production
 ```
 npm run build
 ```
 
-### production 模式打包体积分析
-
-```
-npm run analyze
-```
-
-### eslint 检查
-
-```
-npm run lint
-```
-
-### 组件生成
-
-```
-npm run new:comp
-```
-
-### 页面组件生成
-
-```
-npm run new:view
-```
-
-### table 页面生成
-
-```
-npm run new:tView
-```
+项目组件库 element<https://element.eleme.cn/#/zh-CN/component/quickstart>
